@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="listaTelefonica">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.css">
+    <script src="lib/angular/angular.js"></script>
+    <script>
+        angular.module("listaTelefonica",[]);
+        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope){
+            $scope.app = "Lista Telefonica";
+            $scope.contatos = [
+                {nome:"Pedro", telefone:"99998888"},
+                {nome:"Ana", telefone:"99998877"},
+                {nome:"João", telefone:"99998866"},
+            ];
+            $scope.adicionarContato = function(contato){
+                $scope.contatos.push(angular.copy(contato));
+                delete $scope.contato;
+            };
+        });
+    </script>
+    <style>
+        .jumbotron{
+            width: 400px;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px; 
+        }
+        .table{
+            margin-top: 20px; 
+        }
+        .form-control{
+            margin-bottom: 5px;
+        }
+    </style>
+    <title>Lista Telefonica</title>
+</head>
+<body ng-controller="listaTelefonicaCtrl">
+    <div class="jumbotron">
+        <h3>{{app}}</h3>
+        <table class="table table-striped">
+            <tr>
+                 <th>Nome</th>
+                 <th>Telefone</th>
+            </tr>
+            <tr ng-repeat="contato in contatos">
+                <td>{{contato.nome}}</td>
+                <td>{{contato.telefone}}</td>
+            </tr>
+        </table>
+    <input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome">    
+    <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone">
+    <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+    </div>
+</body>
+</html>
